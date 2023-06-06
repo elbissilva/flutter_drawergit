@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_drawergit/pages/page_cadastro.dart';
+import 'package:flutter_drawergit/pages/page_pedidos.dart';
+import 'package:flutter_drawergit/pages/pagecms.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -44,37 +46,37 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     width: double.infinity,
-                    child: const Text("Cadastrar novo cliente"),
+                    child: const Text("Histórico de pedidos"),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PageHistorico()));
+                  },
                 ),
                 const Divider(
                   color: Colors.black,
-                ),
-                const SizedBox(
-                  height: 20,
                 ),
                 InkWell(
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     width: double.infinity,
-                    child: const Text("Cadastrar novo cliente"),
+                    child: const Text("Extrato de comissões"),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CmsPage()));
+                  },
                 ),
                 const Divider(
                   color: Colors.black,
-                ),
-                const SizedBox(height: 20),
-                const Divider(
-                  color: Colors.black,
-                ),
+                )
               ],
             ),
           ),
-        ),
-        body: const Center(
-          child: Column(),
         ),
       ),
     );
