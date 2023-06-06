@@ -5,8 +5,9 @@ class PageCadastro extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("TELA DE CADASTRO")),
+    return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.green),
+      body: const Center(child: Text("TELA DE CADASTRO")),
     );
   }
 }

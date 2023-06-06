@@ -5,8 +5,11 @@ class CmsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+      ),
+      body: const Center(
         child: Text("Extrato de comissões "),
       ),
     );

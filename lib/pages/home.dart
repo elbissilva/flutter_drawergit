@@ -33,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: const Text("Cadastrar novo cliente"),
                   ),
                   onTap: () {
+                    Navigator.pop(context);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -49,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: const Text("Histórico de pedidos"),
                   ),
                   onTap: () {
+                    Navigator.pop(context);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -65,6 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: const Text("Extrato de comissões"),
                   ),
                   onTap: () {
+                    Navigator.pop(context);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
