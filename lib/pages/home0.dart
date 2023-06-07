@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_drawergit/pages/home1.dart';
+import 'package:flutter_drawergit/pages/home2.dart';
+import 'package:flutter_drawergit/pages/home3.dart';
 import 'package:flutter_drawergit/pages/page_cadastro.dart';
 import 'package:flutter_drawergit/pages/page_pedidos.dart';
 import 'package:flutter_drawergit/pages/pagecms.dart';
@@ -11,6 +14,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int posicaoPage = 0;
+  PageController controller = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -81,6 +86,30 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
+        body: Column(children: [
+          Expanded(
+            child: PageView(
+                controller: controller,
+                onPageChanged: (value) {
+                  setState(() {
+                    posicaoPage = value;
+                  });
+                },
+                // scrollDirection: Axis.vertical,
+                children: const [Home1(), Home2(), Home3()]),
+          ),
+          BottomNavigationBar(
+              onTap: (value) {
+                controller.jumpToPage(value);
+              },
+              currentIndex: posicaoPage,
+              items: const [
+                BottomNavigationBarItem(label: "HOME1", icon: Icon(Icons.home)),
+                BottomNavigationBarItem(
+                    label: "HOME2", icon: Icon(Icons.person)),
+                BottomNavigationBarItem(label: "HOME3", icon: Icon(Icons.add)),
+              ]),
+        ]),
       ),
     );
   }
