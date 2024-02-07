@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_drawergit/pages/home1.dart';
-import 'package:flutter_drawergit/pages/home2.dart';
-import 'package:flutter_drawergit/pages/home3.dart';
-import 'package:flutter_drawergit/pages/page_cadastro.dart';
-import 'package:flutter_drawergit/pages/page_pedidos.dart';
-import 'package:flutter_drawergit/pages/pagecms.dart';
+import 'package:flutter_drawergit/app_images.dart';
+import 'package:flutter_drawergit/widgets/custon_drawer.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -21,95 +17,93 @@ class _MyHomePageState extends State<MyHomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.green,
-          title: const Text("Meu app"),
+          backgroundColor: const Color.fromRGBO(76, 175, 80, 1),
+          title: const Text(
+            "AgendLab",
+            style: TextStyle(fontWeight: FontWeight.w800),
+          ),
         ),
-        drawer: Drawer(
-          child: Padding(
-            padding: const EdgeInsetsDirectional.symmetric(
-                horizontal: 10, vertical: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        drawer: const CustonDrawer(),
+        backgroundColor: const Color.fromARGB(255, 198, 212, 217),
+        body: Center(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            const SizedBox(
+              height: 200,
+            ),
+            Row(
               children: [
-                InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    width: double.infinity,
-                    child: const Text("Cadastrar novo cliente"),
+                Expanded(child: Container()),
+                Expanded(
+                  flex: 10,
+                  child: Image.asset(
+                    ImageAPP.pmvx,
                   ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PageCadastro()));
-                  },
                 ),
-                const Divider(
-                  color: Colors.black,
-                ),
-                InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    width: double.infinity,
-                    child: const Text("Histórico de pedidos"),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PageHistorico()));
-                  },
-                ),
-                const Divider(
-                  color: Colors.black,
-                ),
-                InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    width: double.infinity,
-                    child: const Text("Extrato de comissões"),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const CmsPage()));
-                  },
-                ),
-                const Divider(
-                  color: Colors.black,
-                )
+                Expanded(child: Container()),
               ],
             ),
-          ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+                width: double.infinity,
+                margin: const EdgeInsets.symmetric(horizontal: 100),
+                alignment: Alignment.topRight,
+                child: const Text("Silva Representações e Desenvolvimentos")),
+            const SizedBox(
+              height: 5,
+            ),
+            Column(
+              children: [
+                Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                    width: double.infinity,
+                    child: Card(
+                      elevation: 8,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  ImageAPP.ifpa,
+                                  height: 15,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                const Text(
+                                  "AgendLab",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Text(
+                              " AgendLab é um projeto acadêmico que tem como principal proposta o desenvolvimento de uma ferramenta tecnológica para agendamento de exames por meio de uma plataforma móvel.",
+                              textAlign: TextAlign.justify,
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text("Ler mais"),
+                            )
+                          ],
+                        ),
+                      ),
+                    )),
+              ],
+            )
+          ]),
         ),
-        body: Column(children: [
-          Expanded(
-            child: PageView(
-                controller: controller,
-                onPageChanged: (value) {
-                  setState(() {
-                    posicaoPage = value;
-                  });
-                },
-                // scrollDirection: Axis.vertical,
-                children: const [Home1(), Home2(), Home3()]),
-          ),
-          BottomNavigationBar(
-              onTap: (value) {
-                controller.jumpToPage(value);
-              },
-              currentIndex: posicaoPage,
-              items: const [
-                BottomNavigationBarItem(label: "HOME1", icon: Icon(Icons.home)),
-                BottomNavigationBarItem(
-                    label: "HOME2", icon: Icon(Icons.person)),
-                BottomNavigationBarItem(label: "HOME3", icon: Icon(Icons.add)),
-              ]),
-        ]),
       ),
     );
   }

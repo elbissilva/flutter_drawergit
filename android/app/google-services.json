@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "664656667434",
+    "project_id": "app-smsvx",
+    "storage_bucket": "app-smsvx.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664656667434:android:a25f8103a064ac0248b453",
+        "android_client_info": {
+          "package_name": "com.example.flutter_drawergit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoKx3tgabADzggx7OdblDtDGMARAG_tMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
