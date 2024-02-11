@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_drawergit/pages/page_finished.dart';
@@ -55,18 +53,6 @@ class _PageCadastroState extends State<PageCadastro> {
     String formatoDesejado = "dd-MM-yyyy";
     String dataFormatada2 = DateFormat(formatoDesejado).format(data);
   }
-
-  // carregarDados() async {
-  //   storage = await SharedPreferences.getInstance();
-
-  //   setState(() {
-  //     nomeController.text = storage.getString(CHAVE_NOME) ?? "";
-  //     dataNascController.text = storage.getString(CHAVE_DATA) ?? "";
-  //     idController.text = storage.getString(CHAVE_ID) ?? "";
-  //     exameSelecionado = storage.getString(CHAVE_EXAME) ?? "";
-  //     opcoesSelecionadas = storage.getString(CHAVE_OPCAO) ?? "";
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -174,15 +160,15 @@ class _PageCadastroState extends State<PageCadastro> {
                     onTap: () async {
                       var data = await showDatePicker(
                         context: context,
-                        initialDate: DateTime(1993, 1, 1),
-                        firstDate: DateTime(1920, 1, 1),
-                        lastDate: DateTime(2023, 6, 1),
+                        initialDate: DateTime(2024, 1, 1),
+                        firstDate: DateTime(2023, 1, 1),
+                        lastDate: DateTime(2027, 6, 1),
                       );
                       if (data != null) {
                         setState(() {
                           dataAgndController.text =
                               DateFormat('dd/MM/yyyy').format(data);
-                          dataFormatada = data;
+                          dataFormatada2 = data;
                         });
                       }
                     },
@@ -190,7 +176,7 @@ class _PageCadastroState extends State<PageCadastro> {
                   TextButton(
                     onPressed: () async {
                       setState(() {
-                        salvando = true;
+                        salvando = false;
                       });
 
                       if (nomeController.text.trim().length < 3) {
@@ -227,6 +213,9 @@ class _PageCadastroState extends State<PageCadastro> {
                                     Text("Preencha a data de agendamento")));
                         return;
                       }
+                      setState(() {
+                        salvando = false;
+                      });
 
                       try {
                         var db = FirebaseFirestore.instance;
@@ -239,22 +228,14 @@ class _PageCadastroState extends State<PageCadastro> {
                           "agendamento":
                               DateFormat('yyyy-MM-dd').format(dataFormatada2!),
                         };
+                        setState(() {
+                          salvando = true;
+                        });
 
                         var docRef =
                             await db.collection("pacientes").add(paciente);
 
                         print('DocumentSnapshot added with ID: ${docRef.id}');
-
-                        setState(() {
-                          salvando = false;
-                        });
-
-                        // ignore: use_build_context_synchronously
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const FinishedPage()),
-                        );
                       } catch (error) {
                         print('Erro ao salvar no Firestore: $error');
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -264,6 +245,23 @@ class _PageCadastroState extends State<PageCadastro> {
                           salvando = false;
                         });
                       }
+
+                      // ignore: use_build_context_synchronously
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const FinishedPage()),
+                      );
+                      nomeController.text = "";
+                      dataNascController.text = "";
+                      idController.text = "";
+                      dataAgndController.text = "";
+                      exameSelecionado = "";
+                      opcoesSelecionadas = "";
+
+                      setState(() {
+                        salvando = false;
+                      });
                     },
                     child: const Text("Salvar"),
                   ),

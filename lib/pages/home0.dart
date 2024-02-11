@@ -50,7 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: double.infinity,
                 margin: const EdgeInsets.symmetric(horizontal: 100),
                 alignment: Alignment.topRight,
-                child: const Text("Silva Representações e Desenvolvimentos")),
+                child: const Text(
+                  "Silva Representações e Desenvolvimentos",
+                  style: TextStyle(color: Colors.red),
+                )),
             const SizedBox(
               height: 5,
             ),

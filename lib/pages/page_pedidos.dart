@@ -11,6 +11,8 @@ class AgendaPac extends StatefulWidget {
 
 class _AgendaPacState extends State<AgendaPac> {
   TextEditingController userSearchController = TextEditingController();
+  Map<String, Color> tileColors =
+      {}; // Variável para controlar a cor do ListTile
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +37,16 @@ class _AgendaPacState extends State<AgendaPac> {
             itemCount: pacientes.length,
             itemBuilder: (context, index) {
               final paciente = pacientes[index];
+              final pacienteId = paciente.id;
               final pacienteData = paciente.data()
                   as Map<String, dynamic>; // Atributos do paciente
+              final tileColor = tileColors[pacienteId] ??
+                  Colors.white; // Obter a cor associada ao paciente
               return ListTile(
+                tileColor: tileColor, // Definir a cor do ListTile
                 leading: Image.asset(ImageAPP.paciente),
                 title: Text(
-                  pacienteData['nome'] ??
-                      'Nome não encontrado', // Retorne o nome do paciente
+                  "Nome: ${pacienteData['nome']}",
                   style: const TextStyle(
                       fontSize: 17, fontWeight: FontWeight.w800),
                 ),
@@ -49,19 +54,33 @@ class _AgendaPacState extends State<AgendaPac> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      pacienteData['tipo_exame'] ??
-                          'Tipo de exame não encontrado', // Retorne o tipo de exame
+                      "Exame: ${pacienteData['exame']}",
                       style: const TextStyle(fontWeight: FontWeight.w900),
                     ),
                     Text(
-                      pacienteData['data_agendada'] ??
-                          'Data agendada não encontrada', // Retorne a data agendada
+                      "Agendamento: ${pacienteData['agendamento']}",
+                      style: const TextStyle(fontWeight: FontWeight.w900),
+                    ),
+                    Text(
+                      "Clínica: ${pacienteData['opcoes']}",
                       style: const TextStyle(fontWeight: FontWeight.w900),
                     ),
                   ],
                 ),
                 trailing: PopupMenuButton<String>(
-                  onSelected: (menu) {},
+                  onSelected: (menu) {
+                    if (menu == "Exame realizado") {
+                      setState(() {
+                        tileColors[pacienteId] = const Color.fromARGB(
+                            255, 178, 225, 179); // Atualize a cor do ListTile
+                      });
+                    }
+                    if (menu == "Não compareceu") {
+                      setState(() {
+                        tileColors[pacienteId] = Colors.red;
+                      });
+                    }
+                  },
                   itemBuilder: (BuildContext bc) {
                     return <PopupMenuEntry<String>>[
                       const PopupMenuItem<String>(
