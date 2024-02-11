@@ -5,15 +5,17 @@ class Paciente {
   var _exame = "";
   var _opcaoex = "";
   var _atendido = "";
+  var _agendamento = "";
 
   Paciente(this._nome, this._dn, this._id, this._exame, this._opcaoex,
-      this._atendido) {
+      this._atendido, this._agendamento) {
     _nome = nome;
     _dn = dn;
     _id = id;
     _exame = exame;
     _opcaoex = opcaoex;
     _atendido = atendido;
+    _agendamento = agendamento;
   }
   get nome => _nome;
   set nome(nome) {
@@ -43,5 +45,10 @@ class Paciente {
   get atendido => _atendido;
   set atendido(atendido) {
     _atendido = atendido;
+  }
+
+  get agendamento => _agendamento;
+  set agendamento(agendamento) {
+    _agendamento = agendamento;
   }
 }
